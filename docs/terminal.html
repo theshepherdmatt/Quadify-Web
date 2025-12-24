@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <title>Headless Setup & Terminal Access – Quadify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #0f1419;
+            --panel: #1a1f2e;
+            --text: #e6e8eb;
+            --muted: #9aa4b2;
+            --accent: #7c7cff;
+            --warning: #ffb020;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 20, 25, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            color: var(--text);
+        }
+
+        .logo:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+        }
+
+        ul, ol {
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 680px;
+            display: block;
+            margin: 1rem auto 1.25rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #000;
+        }
+
+        pre {
+            background: #0b0f14;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            overflow-x: auto;
+        }
+
+        footer {
+            margin-top: 3rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">
+            Quadify
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Start</a>
+            <a href="volumio.html">Volumio</a>
+            <a href="wifi.html">Wi-Fi</a>
+            <a href="terminal.html">Terminal</a>
+            <a href="installation.html">Install</a>
+            <a href="wiring.html">Wiring</a>
+            <a href="oled.html">OLED</a>
+            <a href="mcp23017.html">MCP23017</a>
+            <a href="buttons.html">Buttons</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1>Headless Setup & Terminal Access</h1>
+    <div class="meta">
+        Quadify • Volumio headless configuration • Matt Shepherd
+    </div>
+
+    <section>
+        <h2>What “headless” means</h2>
+
+        <p>
+            Running the system <strong>headless</strong> means operating it
+            without a dedicated monitor, keyboard, or mouse connected to the
+            Raspberry Pi.
+        </p>
+
+        <p>
+            Instead, we’ll access the Pi remotely over the network using SSH.
+            This is how Quadify is designed to run long-term.
+        </p>
+    </section>
+
+    <section>
+        <h2>Step 1: Enable SSH in Volumio</h2>
+
+        <img src="assets/images/terminal-1.png"
+             alt="Volumio DEV page showing SSH toggle"
+             class="step-image">
+
+        <ol>
+            <li>
+                Open a web browser and navigate to your Volumio IP address,
+                adding <strong>/dev</strong> to the end:
+                <br>
+                <strong>http://&lt;your-volumio-ip&gt;/dev</strong>
+            </li>
+            <li>This opens the Volumio <strong>DEV</strong> page</li>
+            <li>Locate the <strong>SSH</strong> option and enable it</li>
+        </ol>
+
+        <p class="note">
+            SSH is disabled by default in Volumio — this step is required.
+        </p>
+    </section>
+
+    <section>
+        <h2>Step 2: Download a terminal client</h2>
+
+        <p>
+            To connect to the Raspberry Pi remotely, you’ll need a terminal
+            client. Two common options are:
+        </p>
+
+        <ul>
+            <li>
+                <strong>Termius</strong> — slightly easier to use, more modern
+            </li>
+            <li>
+                <strong>PuTTY</strong> — simple, reliable, and widely used
+            </li>
+        </ul>
+
+        <p>
+            For this guide, we’ll use <strong>PuTTY</strong>.
+        </p>
+
+        <ul>
+            <li>
+                Download PuTTY from <strong>https://www.putty.org</strong>
+            </li>
+            <li>
+                Choose the installer for your system (32-bit or 64-bit —
+                Windows will warn you if you pick the wrong one)
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Step 3: Connect to the Raspberry Pi</h2>
+
+        <img src="assets/images/terminal-2.png"
+             alt="PuTTY SSH connection configuration"
+             class="step-image">
+
+        <ol>
+            <li>Launch PuTTY</li>
+            <li>Enter the IP address of your Volumio device</li>
+            <li>Ensure the connection type is set to <strong>SSH</strong></li>
+            <li>Click <strong>Open</strong></li>
+        </ol>
+
+        <p class="note">
+            This is why you wrote down the IP address earlier.
+        </p>
+    </section>
+
+    <section>
+        <h2>Step 4: Log in</h2>
+
+        <p>
+            If the connection is successful, a black terminal window will
+            appear asking for login details.
+        </p>
+
+        <ul>
+            <li><strong>Username:</strong> volumio</li>
+            <li><strong>Password:</strong> volumio</li>
+        </ul>
+
+        <p class="note">
+            If you see the login prompt, you’ve entered the correct IP address.
+        </p>
+    </section>
+
+    <section>
+        <h2>You’re connected</h2>
+
+        <p>
+            If you’re greeted with a command prompt, you’re now logged into the
+            Raspberry Pi.
+        </p>
+
+        <p class="note">
+            At this point, you’re fully connected and ready to configure the
+            system further.
+        </p>
+    </section>
+
+    <section>
+        <h2>Optional: Test playback from the terminal</h2>
+
+        <p>
+            As a quick test, you can start playback directly from the terminal
+            by typing:
+        </p>
+
+        <pre><code>volumio play</code></pre>
+
+        <p>
+            If music starts playing, everything is working as expected.
+        </p>
+
+        <p class="note">
+            This isn’t required for Quadify to function — it’s simply a quick
+            confidence check.
+        </p>
+    </section>
+
+    <section>
+        <h2>What’s next</h2>
+
+        <p>
+            Now that the Raspberry Pi is accessible headlessly, you can begin
+            adding the screen, buttons, LEDs, and other Quadify hardware.
+        </p>
+    </section>
+
+    <footer>
+        “If you build it, they will come.”
+    </footer>
+
+</div>
+</body>
+</html>

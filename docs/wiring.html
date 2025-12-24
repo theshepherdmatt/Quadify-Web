@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <title>Wiring the Modules – Quadify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #0f1419;
+            --panel: #1a1f2e;
+            --text: #e6e8eb;
+            --muted: #9aa4b2;
+            --accent: #7c7cff;
+            --warning: #ffb020;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 20, 25, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            color: var(--text);
+        }
+
+        .logo:hover {
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+        }
+
+        .warning {
+            border-left: 4px solid var(--warning);
+            padding-left: 1rem;
+            background: rgba(255,176,32,0.05);
+        }
+
+        ul {
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 680px;
+            display: block;
+            margin: 1rem auto 1.25rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: #000;
+        }
+
+        footer {
+            margin-top: 3rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">
+            Quadify
+        </a>
+
+        <nav class="nav">
+            <a href="index.html">Start</a>
+            <a href="volumio.html">Volumio</a>
+            <a href="wifi.html">Wi-Fi</a>
+            <a href="terminal.html">Terminal</a>
+            <a href="installation.html">Install</a>
+            <a href="wiring.html">Wiring</a>
+            <a href="oled.html">OLED</a>
+            <a href="mcp23017.html">MCP23017</a>
+            <a href="buttons.html">Buttons</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1>Wiring the Modules</h1>
+    <div class="meta">
+        Quadify • Hardware setup guide • Matt Shepherd
+    </div>
+
+    <section>
+        <h2>Wiring overview</h2>
+
+        <img src="assets/images/wiring-1.png"
+             alt="Quadify wiring diagram overview"
+             class="step-image">
+
+        <p>
+            Most Quadify modules require <strong>power (VCC)</strong> and
+            <strong>ground (GND)</strong>, with the exception of the buttons
+            themselves.
+        </p>
+
+        <p>
+            To keep things simple during the initial setup, this guide refers
+            to <strong>physical pin numbers</strong> on the Raspberry Pi header.
+            These pins are also known as GPIOs and can be numbered differently
+            in software, but we won’t go into that here.
+        </p>
+    </section>
+
+    <section>
+        <h2>Connecting the OLED screen</h2>
+
+        <ul>
+            <li>Refer to the wiring diagram above for pin locations</li>
+            <li>
+                Connect the screen’s <strong>VCC</strong> and <strong>GND</strong>
+                to the Raspberry Pi’s <strong>3.3V</strong> and <strong>GND</strong> pins
+            </li>
+            <li class="note">
+                <strong>Important:</strong> Do <em>not</em> connect the screen to 5V.
+                Although some manufacturers state 5V compatibility, using 3.3V
+                significantly reduces the risk of damaging the display
+            </li>
+            <li>
+                Connect the remaining screen pins to the corresponding pin
+                numbers on the Raspberry Pi
+            </li>
+            <li>
+                Double-check all connections before applying power
+            </li>
+        </ul>
+
+        <p class="note">
+            Once everything is working correctly, hot glue can be used to
+            secure the wires more permanently — but only after testing.
+        </p>
+    </section>
+
+    <section>
+        <h2>Connecting the MCP23017 board</h2>
+
+        <ul>
+            <li>Refer to the wiring diagram for correct pin placement</li>
+            <li>
+                Connect <strong>VCC</strong> and <strong>GND</strong> to the
+                Raspberry Pi’s <strong>5V</strong> and <strong>GND</strong> pins
+            </li>
+            <li>
+                Connect <strong>SDA</strong> and <strong>SCL</strong> to the
+                corresponding Raspberry Pi GPIO pins
+            </li>
+            <li>
+                Ensure <strong>PA0–PA7</strong> are connected to the LED lines
+                on your button/LED PCB
+            </li>
+            <li>
+                Ensure the buttons are connected to <strong>PB0–PB5</strong>
+            </li>
+        </ul>
+    </section>
+
+    <section class="warning">
+        <h2>Connecting the rotary switch</h2>
+
+        <ul>
+            <li>Connect <strong>VCC</strong> and <strong>GND</strong> first</li>
+            <li>
+                Connect <strong>DT</strong>, <strong>CLK</strong>, and
+                <strong>SW</strong> to individual Raspberry Pi pins
+            </li>
+            <li>
+                Ensure the pins are connected in the correct order
+            </li>
+        </ul>
+
+        <p class="note">
+            The Quadify software will <strong>not start</strong> if the rotary
+            switch is not connected correctly.
+        </p>
+    </section>
+
+    <section>
+        <h2>Using a Terminal HAT (recommended)</h2>
+
+        <img src="assets/images/wiring-2.png"
+             alt="Terminal HAT and IQaudio DAC physical setup"
+             class="step-image">
+
+        <p>
+            This is the recommended method, particularly if you are not
+            confident with soldering or plan to transport or ship units.
+        </p>
+
+        <ol>
+            <li>Power down the Raspberry Pi and disconnect all power</li>
+            <li>Carefully attach the IQaudio DAC to the Raspberry Pi GPIO header</li>
+            <li>Connect the ribbon cable to the DAC’s GPIO extension pins</li>
+            <li>Connect the other end of the ribbon cable to the Terminal HAT</li>
+            <li>Secure all components using screws or clips where provided</li>
+            <li>Ensure the ribbon cable is not twisted or under strain</li>
+        </ol>
+
+        <p class="note">
+            Once complete, power can be restored. No software changes are
+            required when using a Terminal HAT.
+        </p>
+    </section>
+
+    <section>
+        <h2>Screen problems</h2>
+
+        <p>
+            Once connected, the screen should work out of the box. If you
+            experience issues, double-check wiring and power first.
+        </p>
+
+        <p class="note">
+            A small number of screens were shipped with incorrect resistor
+            placement. If you suspect this is the case, please get in touch
+            via Discord for further guidance.
+        </p>
+    </section>
+
+    <footer>
+        “If you build it, they will come.”
+    </footer>
+
+</div>
+</body>
+</html>
