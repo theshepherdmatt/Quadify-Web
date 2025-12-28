@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <title>Quadify – Get Started & Shopping List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --bg: #0f1419;
+            --panel: #1a1f2e;
+            --text: #e6e8eb;
+            --muted: #9aa4b2;
+            --accent: #7c7cff;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(15, 20, 25, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.02em;
+            color: var(--text);
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+        }
+
+        .nav a {
+            font-size: 0.9rem;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        section {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .phase-block + section {
+            margin-top: 0.75rem;
+        }
+
+        section + .phase-block {
+            margin-top: 5rem;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        ul {
+            padding-left: 1.25rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .shop-image {
+            width: 100%;
+            display: block;
+            margin: 1rem 0 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #0b0f14;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 3rem;
+            color: var(--muted);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        .warning-card {
+            background: linear-gradient(
+                180deg,
+                rgba(255, 176, 32, 0.08),
+                rgba(255, 176, 32, 0.04)
+            );
+            border: 1px solid rgba(255, 176, 32, 0.35);
+            border-left: 6px solid #ffb020;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-card h4 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: #ffb020;
+        }
+
+        .warning-card ul {
+            padding-left: 1.25rem;
+        }
+
+        .warning-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-card .note {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* =========================
+        Phase break (non-card)
+        ========================= */
+
+        .phase-block {
+            margin: 4.5rem 0 2.25rem;
+            padding-top: 2.75rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .phase-block {
+            margin: 3rem 0 1.5rem;
+            padding-left: 0;
+        }
+
+        .phase-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.35rem;
+        }
+
+        .phase-title {
+            margin: 0 0 0.75rem;
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+
+        .phase-intro {
+            color: var(--muted);
+            max-width: 720px;
+            margin: 0 0 1rem;
+        }
+
+        .phase-list {
+            padding-left: 1.25rem;
+            margin: 0 0 1rem;
+        }
+
+        .phase-list li {
+            margin-bottom: 0.45rem;
+        }
+
+        .phase-note {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin: 0;
+            max-width: 720px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">Quadify</a>
+
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="shopping.html">Shopping List</a>
+            <a href="volumio.html">Volumio</a>
+            <a href="terminal.html">Terminal</a>
+            <a href="installation.html">Install</a>
+            <a href="wiring.html">Wiring</a>
+            <a href="oled.html">OLED</a>
+            <a href="mcp23017.html">MCP23017</a>
+            <a href="buttons.html">Buttons</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+    <div style="margin-bottom: 3.5rem;">
+        <h1 style="font-size:2.4rem;margin-bottom:0.35rem;">
+            Get Started
+        </h1>
+        <div class="meta">
+            Hardware overview & shopping list
+        </div>
+    </div>
+
+    <div class="phase-block">
+        <div class="phase-label">Phase 1</div>
+
+        <h2 class="phase-title">Get some tunes playing</h2>
+
+        <p class="phase-intro">
+            Before worrying about screens, buttons, or fitting everything into an FM4 case,
+            the first goal is simple: get music playing reliably through your existing hi-fi.
+        </p>
+    </div>
+
+    <section>
+        <h3>1. Raspberry Pi 4 (4GB)</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop1.png" alt="Raspberry Pi 4 Model B">
+
+        <p>
+            The Raspberry Pi 4 (4GB Model B) is the core of the Quadify system and
+            provides more than enough performance to run Volumio smoothly without
+            pushing system limits.
+        </p>
+
+        <p>
+            When buying a Raspberry Pi, stick to official UK resellers to ensure
+            you receive a genuine board at a fair price, with proper packaging and
+            support.
+        </p>
+
+        <ul>
+            <li>
+                <a href="https://tinyurl.com/2xcr7wjh" target="_blank">The Pi Hut</a>
+            </li>
+            <li>
+                <a href="https://tinyurl.com/39t4te3t" target="_blank">Pimoroni</a>
+            </li>
+        </ul>
+
+        <p class="note">
+            Avoid third-party sellers on Amazon where prices are often inflated by
+            bulk resellers.
+        </p>
+    </section>
+
+
+    <section>
+        <h3>2. Storage — microSD or USB</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop13.png" alt="microSD card and USB storage">
+
+        <p>
+            To set up your Raspberry Pi for the FM4 Quadify project, you’ll need
+            reliable storage to install the Volumio operating system.
+            The Raspberry Pi 4 supports <strong>both microSD cards and USB storage</strong>,
+            so you can choose whichever suits your setup best.
+        </p>
+
+        <h4>Boot options: microSD card vs USB storage</h4>
+
+        <p>
+            Traditionally, Volumio is installed on a microSD card. However, the
+            Raspberry Pi 4 can also boot directly from a USB flash drive or SSD,
+            which can offer slightly faster boot times and easier access to the
+            storage for updates or tweaks.
+        </p>
+
+        <h4>Option 1: Using a microSD card</h4>
+
+        <p>
+            Investing in a good-quality microSD card is important for performance
+            and long-term reliability. Cheaper cards may work initially but can
+            suffer from slow speeds or early failure.
+        </p>
+
+        <p><strong>Recommended specifications:</strong></p>
+        <ul>
+            <li>Capacity: 32GB or higher</li>
+            <li>Speed Class: Class 10, UHS-I (U1 or U3)</li>
+            <li>Application Performance Class: A1 or A2</li>
+        </ul>
+
+        <p>
+            <strong>Recommended card:</strong><br>
+            SanDisk 32GB microSD (tested and reliable for Raspberry Pi setups)<br>
+            <a href="https://amzn.eu/d/5mAHpCv" target="_blank">View on Amazon</a>
+        </p>
+
+        <p>
+            <strong>microSD card reader:</strong><br>
+            If your computer doesn’t have an SD card slot, you’ll need a USB card reader
+            to write the Volumio image.
+        </p>
+
+        <p>
+            Recommended: The Pi Hut Mini USB 2.0 microSD Card Reader<br>
+            <a href="https://tinyurl.com/mv6zw3dt" target="_blank">View at The Pi Hut</a>
+        </p>
+
+        <h4>Option 2: Booting from USB storage</h4>
+
+        <p>
+            Volumio can also boot directly from USB flash drives or SSDs connected to
+            the Raspberry Pi. This is a good alternative if you don’t have a microSD
+            card reader or want slightly quicker boot times.
+        </p>
+
+        <ul>
+            <li>Slightly faster boot performance</li>
+            <li>Easier access to storage for updates or troubleshooting</li>
+            <li>No microSD card or reader required</li>
+        </ul>
+
+        <p>
+            <strong>Recommended USB drive:</strong><br>
+            SanDisk 32GB Ultra Fit USB 3.2 Flash Drive<br>
+            <a href="https://amzn.eu/d/89LlAZE" target="_blank">View on Amazon</a>
+        </p>
+
+        <p class="note">
+            The setup process is identical for both options. Use Raspberry Pi Imager
+            to write Volumio to your chosen storage, then plug it into the Pi and boot.
+            Raspberry Pi 4 supports USB booting by default.
+        </p>
+    </section>
+
+
+    <section>
+        <h3>3. USB-C Power Supply</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop2.png" alt="Official Raspberry Pi USB-C Power Supply">
+
+        <p>
+            To power your Quadify setup, there are a few options depending on how far
+            you plan to take the build. For most people, the simplest and safest
+            choice is a high-quality USB-C power supply.
+        </p>
+
+        <p>
+            The <strong>official Raspberry Pi USB-C power supply</strong> is strongly
+            recommended. It is designed to deliver clean, stable current and has more
+            than enough capacity to run the Raspberry Pi, DAC, OLED screen, rotary
+            encoder, and IR receiver without issues.
+        </p>
+
+        <p>
+            <strong>Recommended power supply:</strong><br>
+            Official Raspberry Pi USB-C Power Supply (5.1V / 3.0A)<br>
+            Available from The Pi Hut and other official retailers.
+        </p>
+
+        <h4>Power cable tips</h4>
+
+        <ul>
+            <li>
+                If you’re routing power through a case such as the FM4, consider
+                using a slightly longer USB-C cable so it can reach a nearby wall
+                outlet neatly.
+            </li>
+            <li>
+                The cable can be passed through rear panels or side vents to keep
+                external wiring tidy and unobtrusive.
+            </li>
+        </ul>
+
+        <h4>Note on 240V power integration</h4>
+
+        <p>
+            In some custom builds, a 240V inline mains switch is used inside the case
+            to power both the Quadify internals and additional equipment. This is
+            optional and not required for a standard build.
+        </p>
+
+        <p class="note">
+            ⚠ Working with mains electricity is dangerous. If you are not confident
+            or experienced with 240V wiring, do not attempt internal mains
+            modifications. Always prioritise safety and consult a qualified
+            electrician if you’re unsure.
+        </p>
+    </section>
+
+    <section>
+        <h3>4. DAC HAT — HifiBerry DAC+</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop3.png" alt="HifiBerry DAC Plus">
+
+        <p>
+            When building your Quadify DAC, choosing the right DAC HAT
+            (Digital-to-Analog Converter) is important for both sound quality and
+            compatibility. While there are many Raspberry Pi DACs available, not all
+            are truly plug-and-play — some use GPIO pins in ways that complicate the
+            build or require custom configuration.
+        </p>
+
+        <p>
+            For the smoothest experience, the <strong>HifiBerry DAC+</strong> is
+            strongly recommended. It offers excellent audio performance and works
+            seamlessly with both Quadify and Volumio, with no additional setup
+            required.
+        </p>
+
+        <p><strong>Where to buy:</strong></p>
+
+        <ul>
+            <li>
+                <a href="https://tinyurl.com/3mh9whwf" target="_blank">The Pi Hut</a>
+            </li>
+            <li>
+                <a href="https://tinyurl.com/3djzbbnv" target="_blank">HifiBerry</a>
+            </li>
+        </ul>
+
+        <p class="note">
+            Both versions are functionally identical — choose whichever retailer
+            suits you best.
+        </p>
+
+        <h4>Why HifiBerry?</h4>
+
+        <ul>
+            <li>
+                <strong>Proven compatibility:</strong> Fully tested with Quadify and
+                Volumio for a reliable, plug-and-play experience.
+            </li>
+            <li>
+                <strong>GPIO pass-through:</strong> Leaves GPIO pins available for
+                buttons, rotary encoders, LEDs, and OLED displays.
+            </li>
+            <li>
+                <strong>No modifications required:</strong> No custom pin remapping
+                or special drivers needed.
+            </li>
+        </ul>
+
+        <!-- ⚠ Warning card -->
+        <div class="warning-card">
+            <h4>⚠ Important Note on DAC Compatibility</h4>
+
+            <p>
+                When selecting a DAC HAT, it’s essential to consider how it uses the
+                Raspberry Pi’s GPIO pins. Some DACs occupy pins required for OLED
+                displays, buttons, or LEDs, which can lead to conflicts or components
+                not working correctly.
+            </p>
+
+            <ul>
+                <li>
+                    <strong>GPIO pin conflicts:</strong> Certain DACs reserve GPIO
+                    pins that Quadify relies on for user controls and displays.
+                </li>
+                <li>
+                    <strong>Limited GPIO availability:</strong> The Raspberry Pi has
+                    a finite number of pins, and heavily occupied layouts can limit
+                    expansion.
+                </li>
+            </ul>
+
+            <p class="note">
+                The HifiBerry DAC+ is known to coexist cleanly with other Quadify
+                hardware, avoiding these issues and keeping the build straightforward.
+            </p>
+        </div>
+
+        <h4>Using other DACs</h4>
+
+        <p>
+            If you choose a different DAC, make sure to:
+        </p>
+
+        <ul>
+            <li>Confirm it is supported by Volumio</li>
+            <li>Check which GPIO pins it uses or blocks</li>
+            <li>Be prepared to adjust Quadify wiring and configuration if needed</li>
+        </ul>
+
+        <p class="note">
+            Some high-end DACs sound excellent but may limit GPIO access or require
+            extra setup, making them less suitable for Quadify builds that rely on
+            physical controls.
+        </p>
+    </section>
+
+    <section>
+        <h3>5. RCA Cables</h3>
+        <img class="shop-image" src="assets/images/shop/shop4.png" alt="">
+        <p>
+            You probably already own some, but ordering a spare pair avoids frustration
+            later during testing.
+        </p>
+    </section>
+
+    <div class="phase-block">
+
+        <div class="phase-label">Phase 2</div>
+
+        <h2 class="phase-title">Display &amp; Controls</h2>
+
+        <p class="phase-intro">
+            With music playback confirmed, Phase 2 is where Quadify becomes interactive.
+            This stage adds the screen, rotary control, and expanded GPIO needed for a
+            proper front-panel interface.
+        </p>
+
+        <ul class="phase-list">
+            <li>OLED display for track, volume, and system status</li>
+            <li>Rotary encoder for tactile navigation and control</li>
+            <li>GPIO expansion to support buttons and LEDs</li>
+        </ul>
+
+        <p class="phase-note">
+            Take your time here — careful pin planning and tidy wiring will save hours later.
+        </p>
+
+    </div>
+
+    <section>
+        <h3>6. MCP23017 I/O Expansion Board</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop5.png" alt="MCP23017 I/O Expansion Board">
+
+        <p>
+            In the FM4 Quadify project, you may find that the Raspberry Pi doesn’t have
+            enough native GPIO (General Purpose Input/Output) pins to connect all the
+            buttons, LEDs, and controls you’d like to use. The <strong>MCP23017 I/O
+            Expansion Board</strong> solves this neatly by adding extra GPIO without
+            complicating the setup.
+        </p>
+
+        <h4>What it does</h4>
+
+        <ul>
+            <li>
+                <strong>Expands GPIO pins:</strong> Adds 16 additional GPIO pins, giving
+                you far more flexibility for buttons, LEDs, and other inputs.
+            </li>
+            <li>
+                <strong>Simple connection:</strong> Communicates over I²C using just two
+                data lines (SDA and SCL).
+            </li>
+        </ul>
+
+        <h4>How it works</h4>
+
+        <p>
+            The MCP23017 connects to the Raspberry Pi using four jumper wires:
+            SDA, SCL, power (3.3V or 5V depending on the board), and GND.
+            Once connected, your buttons and LEDs are wired to the MCP23017 instead
+            of directly to the Pi.
+        </p>
+
+        <p>
+            A common approach is to dedicate one bank of pins to LEDs and another
+            to buttons, but the exact layout is flexible and will be covered later
+            in the wiring guides.
+        </p>
+
+        <p>
+            <strong>Where to buy:</strong><br>
+            <a href="https://www.thepihut.com/products/mcp23017-i-o-expander" target="_blank">
+                The Pi Hut — MCP23017 I/O Expansion Board
+            </a>
+        </p>
+
+        <p class="note">
+            By using the MCP23017, you avoid exhausting the Raspberry Pi’s built-in
+            GPIO pins while keeping the wiring clean and scalable.
+        </p>
+    </section>
+
+    <section>
+        <h3>7. SSD1322 OLED Display (SPI)</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop6.png" alt="2.8 inch SSD1322 OLED Display">
+
+        <p>
+            For the FM4 Quadify project, you’ll need a <strong>2.8-inch OLED display</strong>
+            with a <strong>256×64 resolution</strong>, powered by the
+            <strong>SSD1322 driver</strong> and using an <strong>SPI interface</strong>.
+            This screen is used to display track information, volume levels, and other
+            Quadify UI elements.
+        </p>
+
+        <h4>Key specifications</h4>
+
+        <ul>
+            <li><strong>Size:</strong> 2.8 inches</li>
+            <li><strong>Resolution:</strong> 256×64 pixels</li>
+            <li><strong>Driver:</strong> SSD1322</li>
+            <li><strong>Interface:</strong> SPI (not I²C or parallel)</li>
+            <li><strong>Colour:</strong> White (preferred for clarity and contrast)</li>
+        </ul>
+
+        <h4>Where to buy</h4>
+
+        <p>
+            Prices vary widely depending on the supplier:
+        </p>
+
+        <ul>
+            <li><strong>Amazon:</strong> ~£50</li>
+            <li><strong>eBay:</strong> ~£30</li>
+            <li><strong>AliExpress:</strong> ~£10–£15</li>
+        </ul>
+
+        <p>
+            <strong>Recommendation:</strong> AliExpress usually offers the best value.
+            Make sure the listing explicitly states <strong>SSD1322</strong> and
+            <strong>SPI</strong>, as visually similar displays may use different drivers
+            or interfaces.
+        </p>
+
+        <h4>Important notes</h4>
+
+        <ul>
+            <li>
+                <strong>Compatibility:</strong> The display must be SPI-based and use
+                the SSD1322 driver.
+            </li>
+            <li>
+                <strong>Physical size:</strong> Some variants are a few millimetres
+                larger and may not fit the 3D-printed holders available through me.
+            </li>
+            <li>
+                <strong>Best variant:</strong> The green PCBs with a
+                <strong>16-pin header</strong> are the most reliable and easiest to work with.
+            </li>
+        </ul>
+
+        <p class="note">
+            If you’re unsure about a specific listing, feel free to check before ordering
+            — it’s easy to buy the wrong variant by mistake.
+        </p>
+    </section>
+
+    <section>
+        <h3>8. Rotary Encoder (KY-040)</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop7.png" alt="KY-040 Rotary Encoder Module">
+
+        <p>
+            The <strong>KY-040 rotary encoder</strong> is used in the FM4 Quadify project
+            to control volume and navigate menus within the Quadify interface. It provides
+            a tactile, infinitely rotating control with a built-in push-button, making it
+            both intuitive and satisfying to use.
+        </p>
+
+        <h4>What to look for</h4>
+
+        <ul>
+            <li><strong>Module name:</strong> KY-040</li>
+            <li>
+                <strong>Pins:</strong> 5-pin interface
+                (CLK, DT, SW, +, GND)
+            </li>
+            <li>
+                <strong>Mounting:</strong> PCB-mounted encoder module
+                (on-board resistors are common and helpful)
+            </li>
+        </ul>
+
+        <h4>Where to buy</h4>
+
+        <ul>
+            <li>
+                <strong>Amazon:</strong> Occasionally available —
+                search for “KY-040 Rotary Encoder Module”
+            </li>
+            <li>
+                <strong>eBay:</strong> KY-040 Rotary Encoder Module (UK sellers common)
+            </li>
+            <li>
+                <strong>AliExpress:</strong> Lowest prices (~£1–£3) —
+                search for “KY-040 rotary encoder”
+            </li>
+        </ul>
+
+        <p class="note">
+            💡 Some listings include jumper wires, which can be handy if you don’t
+            already have spares.
+        </p>
+
+        <h4>Why the KY-040?</h4>
+
+        <ul>
+            <li>Works seamlessly with the Raspberry Pi and MCP23017 via GPIO</li>
+            <li>Push-to-click functionality for menu selection</li>
+            <li>Widely supported in Python with existing libraries and examples</li>
+        </ul>
+
+        <p class="note">
+            This encoder gives Quadify a proper physical interface and is a key part of
+            making the system feel responsive and hands-on.
+        </p>
+    </section>
+
+    <section>
+        <h3>9. Jumper Wires (Female-to-Female)</h3>
+
+        <img class="shop-image" src="assets/images/shop/shop8.png" alt="Female-to-female jumper wires">
+
+        <p>
+            You’ll need a set of <strong>female-to-female jumper wires</strong> to connect
+            the OLED display, rotary encoder, and MCP23017 I/O expander to the Raspberry Pi
+            or expansion headers. These are essential for flexible, tool-free wiring during
+            your FM4 Quadify build.
+        </p>
+
+        <h4>What to look for</h4>
+
+        <ul>
+            <li><strong>Connector type:</strong> Female-to-female</li>
+            <li><strong>Length:</strong> ~20cm (a good balance for internal routing)</li>
+            <li><strong>Quantity:</strong> 40 wires per set is typical</li>
+            <li><strong>Pitch:</strong> 2.54mm (standard GPIO spacing)</li>
+            <li><strong>Colour:</strong> Multicoloured helps with tracing connections</li>
+        </ul>
+
+        <h4>Where to buy (UK)</h4>
+
+        <ul>
+            <li>
+                <strong>eBay:</strong> 40pcs Female-to-Female Jumper Wires (20cm) —
+                approx. £3–£4
+            </li>
+            <li>
+                <strong>The Pi Hut:</strong> Occasionally in stock —
+                search for “jumper wires” (£4–£5)
+            </li>
+            <li>
+                <strong>Pimoroni:</strong> Usually part of mixed jumper kits —
+                approx. £5–£6
+            </li>
+        </ul>
+
+        <p class="note">
+            💡 Make sure the set is <strong>female-to-female</strong>, not male-to-male or
+            mixed, unless you’re buying for multiple projects.
+        </p>
+    </section>
+
+
+    <section>
+        <h2>Advanced setups (optional)</h2>
+        <p class="note">
+            These steps involve mains voltage. Proceed only if you know what you’re doing.
+        </p>
+    </section>
+
+    <section>
+        <h3>10. Internal 5V Power Supply</h3>
+        <img class="shop-image" src="assets/images/shop/shop9.png" alt="">
+        <p>
+            Allows the Raspberry Pi and accessories to be powered internally while
+            retaining the original FM4 mains passthrough.
+        </p>
+    </section>
+
+    <section>
+        <h3>11. Original FM4 Power Switch</h3>
+        <img class="shop-image" src="assets/images/shop/shop10.png" alt="">
+        <p>
+            Reusing the original switch preserves the FM4 look and controls both the
+            internal PSU and mains passthrough.
+        </p>
+    </section>
+
+    <section>
+        <h3>12. Base & 3D-Printed Screen Holder</h3>
+        <img class="shop-image" src="assets/images/shop/shop11.png" alt="">
+        <p>
+            A clear perspex base and custom 3D-printed holder provide secure mounting
+            for the new electronics and OLED display.
+        </p>
+    </section>
+
+    <footer>
+        “Build it once. Build it properly.”
+    </footer>
+
+</div>
+
+</body>
+</html>
