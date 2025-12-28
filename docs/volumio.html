@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
     <meta charset="UTF-8">
-    <title>Step 1 – Installing Volumio – Quadify</title>
+    <title>Volumio Setup – Quadify</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
@@ -12,7 +12,6 @@
             --text: #e6e8eb;
             --muted: #9aa4b2;
             --accent: #7c7cff;
-            --warning: #ffb020;
             --border: rgba(255,255,255,0.08);
         }
 
@@ -40,19 +39,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
         }
 
         .logo {
             font-weight: 700;
             font-size: 1.05rem;
-            letter-spacing: 0.02em;
             color: var(--text);
-        }
-
-        .logo:hover {
-            text-decoration: none;
-            opacity: 0.9;
         }
 
         .nav {
@@ -142,7 +134,6 @@
 
         <nav class="nav">
             <a href="index.html">Home</a>
-            <a href="shopping.html">Shopping List</a>
             <a href="volumio.html">Volumio</a>
             <a href="terminal.html">Terminal</a>
             <a href="installation.html">Install</a>
@@ -156,126 +147,128 @@
 
 <div class="container">
 
-    <h1>Step 1 – Installing Volumio</h1>
+    <h1>Volumio Setup</h1>
     <div class="meta">
-        Quadify • FM4 system setup • Matt Shepherd
+        Quadify • Install, first boot & Wi-Fi
     </div>
 
     <section>
-        <h2>What you’re doing</h2>
-
+        <h2>What this step covers</h2>
         <p>
-            To set up your FM4 Quadify system, you’ll need to install
-            <strong>Volumio</strong> — a dedicated music player operating system
-            designed for the Raspberry Pi.
+            This page covers the complete Volumio setup process:
         </p>
-
-        <p>
-            This step covers downloading Volumio and flashing it to a
-            microSD card using the official Raspberry Pi Imager.
-        </p>
-    </section>
-
-    <section>
-        <h2>What you’ll need</h2>
-
         <ul>
-            <li>Raspberry Pi</li>
-            <li>MicroSD card</li>
-            <li>MicroSD card reader (USB adapter or built-in)</li>
-            <li>PC or laptop with internet access</li>
-            <li>Raspberry Pi Imager</li>
+            <li>Installing Volumio on a microSD card</li>
+            <li>First boot on the Raspberry Pi</li>
+            <li>Connecting Volumio to your Wi-Fi network</li>
+            <li>Enabling the DAC</li>
+            <li>Confirming audio playback</li>
         </ul>
     </section>
 
     <section>
-        <h2>Step 1: Download Raspberry Pi Imager</h2>
+        <h2>Step 1: Install Volumio on the SD card</h2>
 
-        <img src="assets/images/volumio-1.png"
-             alt="Raspberry Pi Imager download page"
-             class="step-image">
+        <img src="assets/images/volumio-1.png" class="step-image" alt="Raspberry Pi Imager">
 
         <ol>
-            <li>
-                Visit the Raspberry Pi software page:<br>
-                <strong>https://www.raspberrypi.com/software/</strong>
-            </li>
-            <li>
-                Download the Raspberry Pi Imager for your operating system
-                (Windows, macOS, or Linux)
-            </li>
-            <li>
-                Install and launch the Raspberry Pi Imager
-            </li>
+            <li>Go to <strong>https://www.raspberrypi.com/software/</strong></li>
+            <li>Download and install Raspberry Pi Imager</li>
+            <li>Open the Imager and click <strong>Choose OS</strong></li>
+            <li>Select <strong>Media Player OS → Volumio</strong></li>
+            <li>Select your microSD card as the target</li>
+            <li>Click <strong>Write</strong> and wait for it to complete</li>
         </ol>
-    </section>
 
-    <section>
-        <h2>Step 2: Insert the SD card</h2>
-
-        <img src="assets/images/volumio-2.png"
-             alt="SD card inserted and Raspberry Pi Imager open"
-             class="step-image">
-
-        <p>
-            Insert your microSD card into your computer using either a built-in
-            SD card slot or a USB card reader.
+        <p class="note">
+            When finished, safely eject the SD card.
         </p>
     </section>
 
     <section>
-        <h2>Step 3: Select the operating system</h2>
+        <h2>Step 2: Assemble the hardware</h2>
 
-        <img src="assets/images/volumio-3.png"
-             alt="Selecting Volumio in Raspberry Pi Imager"
-             class="step-image">
+        <img src="assets/images/wifi-1.png" class="step-image" alt="DAC installed on Raspberry Pi">
 
-        <ol>
-            <li>Open Raspberry Pi Imager</li>
-            <li>Click <strong>Choose OS</strong></li>
-            <li>Select <strong>Media Player OS</strong></li>
-            <li>Choose <strong>Volumio</strong> from the list</li>
-        </ol>
+        <ul>
+            <li>Ensure the Raspberry Pi is powered off</li>
+            <li>Install the DAC HAT onto the GPIO header</li>
+            <li>Secure it using the supplied bolts</li>
+            <li>Insert the microSD card into the Pi</li>
+        </ul>
     </section>
 
     <section>
-        <h2>Step 4: Choose the target storage</h2>
+        <h2>Step 3: Power up</h2>
+
+        <img src="assets/images/wifi-3.png" class="step-image" alt="Powering the Raspberry Pi">
 
         <p>
-            Click <strong>Choose Storage</strong> and select the microSD card
-            you inserted earlier.
+            Connect the power supply and allow the Raspberry Pi to boot.
         </p>
 
         <p class="note">
-            Make sure you select the correct card — all data on the selected
-            card will be erased.
+            First boot can take a couple of minutes — be patient.
         </p>
     </section>
 
     <section>
-        <h2>Step 5: Write the image</h2>
+        <h2>Step 4: Connect to Volumio’s Wi-Fi</h2>
 
-        <img src="assets/images/volumio-4.png"
-             alt="Writing Volumio image to SD card"
-             class="step-image">
+        <img src="assets/images/wifi-4.png" class="step-image" alt="Volumio Wi-Fi access point">
 
-        <p>
-            Click <strong>Write</strong> to begin flashing Volumio to the SD card.
-            This process may take a few minutes.
-        </p>
+        <ul>
+            <li>Wait for a Wi-Fi network called <strong>Volumio</strong> or <strong>Volumio-XXXX</strong></li>
+            <li>Connect to it using your phone, tablet, or computer</li>
+            <li>Follow the on-screen setup to connect Volumio to your home Wi-Fi</li>
+        </ul>
     </section>
 
     <section>
-        <h2>Step 6: Eject the SD card</h2>
+        <h2>Step 5: Open the Volumio interface</h2>
+
+        <img src="assets/images/wifi-5.png" class="step-image" alt="Volumio web interface">
 
         <p>
-            Once the process has completed, safely eject the microSD card from
-            your computer.
+            Open a browser and go to:
         </p>
+
+        <ul>
+            <li><strong>http://volumio.local</strong></li>
+            <li><strong>or the IP address shown in your router</strong></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Step 6: Enable the DAC</h2>
+
+        <p>
+            In Volumio:
+        </p>
+
+        <ul>
+            <li>Open <strong>Playback Options</strong></li>
+            <li>Enable <strong>I²S DAC</strong></li>
+            <li>Select your DAC model</li>
+            <li>Click <strong>Save</strong></li>
+        </ul>
 
         <p class="note">
-            You’re now ready to insert the SD card into your Raspberry Pi and
-            continue with the next setup step.
+            If you hear no sound later, come back here first.
+        </p>
+    </section>
+
+    <section>
+        <h2>Step 7: Add music & test playback</h2>
+
+        <ul>
+            <li>USB storage</li>
+            <li>Network shares</li>
+            <li>Streaming services (Qobuz / TIDAL)</li>
+        </ul>
+
+        <p>
+            Start playback and confirm audio is coming through your system.
         </p>
     </section>
 
@@ -284,6 +277,6 @@
     </footer>
 
 </div>
+
 </body>
 </html>
-
