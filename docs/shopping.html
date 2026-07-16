@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Quadify – Get Started & Shopping List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Shopping list and getting-started guide for building a Quadify system on Raspberry Pi.">
+    <link rel="canonical" href="https://quadify.uk/shopping.html">
+    <meta property="og:title" content="Quadify – Get Started & Shopping List">
+    <meta property="og:description" content="Shopping list and getting-started guide for building a Quadify system on Raspberry Pi.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quadify.uk/shopping.html">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
     <style>
         :root {
@@ -64,6 +73,10 @@
         .nav a:hover {
             color: var(--text);
             text-decoration: none;
+        }
+
+        .nav a.active {
+            color: var(--text);
         }
 
         .container {
@@ -247,7 +260,7 @@
 
         <nav class="nav">
             <a href="index.html">Home</a>
-            <a href="shopping.html">Shopping List</a>
+            <a href="shopping.html" class="active" aria-current="page">Shopping List</a>
             <a href="volumio.html">Volumio</a>
             <a href="terminal.html">Terminal</a>
             <a href="installation.html">Install</a>
