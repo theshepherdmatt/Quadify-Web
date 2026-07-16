@@ -10,7 +10,7 @@
     <meta property="og:description" content="Shopping list and getting-started guide for building a Quadify system on Raspberry Pi.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quadify.uk/shopping.html">
-    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.webp">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
@@ -249,6 +249,40 @@
             max-width: 720px;
         }
 
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 0.75rem;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -257,8 +291,9 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="index.html" class="logo">Quadify</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-        <nav class="nav">
+        <nav class="nav" id="site-nav">
             <a href="index.html">Home</a>
             <a href="shopping.html" class="active" aria-current="page">Shopping List</a>
             <a href="volumio.html">Volumio</a>
@@ -297,7 +332,7 @@
     <section>
         <h3>1. Raspberry Pi 4 (4GB)</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop1.png" alt="Raspberry Pi 4 Model B">
+        <img class="shop-image" src="assets/images/shop/shop1.webp" width="1000" height="1000" loading="lazy" alt="Raspberry Pi 4 Model B">
 
         <p>
             The Raspberry Pi 4 (4GB Model B) is the core of the Quadify system and
@@ -330,7 +365,7 @@
     <section>
         <h3>2. Storage: microSD or USB</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop13.png" alt="microSD card and USB storage">
+        <img class="shop-image" src="assets/images/shop/shop13.webp" width="1536" height="1024" loading="lazy" alt="microSD card and USB storage">
 
         <p>
             To set up your Raspberry Pi for the FM4 Quadify project, you’ll need
@@ -411,7 +446,7 @@
     <section>
         <h3>3. USB-C Power Supply</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop2.png" alt="Official Raspberry Pi USB-C Power Supply">
+        <img class="shop-image" src="assets/images/shop/shop2.webp" width="1024" height="1024" loading="lazy" alt="Official Raspberry Pi USB-C Power Supply">
 
         <p>
             To power your Quadify setup, there are a few options depending on how far
@@ -465,7 +500,7 @@
     <section>
         <h3>4. DAC HAT: HifiBerry DAC+</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop3.png" alt="HifiBerry DAC Plus">
+        <img class="shop-image" src="assets/images/shop/shop3.webp" width="1024" height="1024" loading="lazy" alt="HifiBerry DAC Plus">
 
         <p>
             When building your Quadify DAC, choosing the right DAC HAT
@@ -565,7 +600,7 @@
 
     <section>
         <h3>5. RCA Cables</h3>
-        <img class="shop-image" src="assets/images/shop/shop4.png" alt="">
+        <img class="shop-image" src="assets/images/shop/shop4.webp" width="1000" height="1000" loading="lazy" alt="">
         <p>
             You probably already own some, but ordering a spare pair avoids frustration
             later during testing.
@@ -599,7 +634,7 @@
     <section>
         <h3>6. MCP23017 I/O Expansion Board</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop5.png" alt="MCP23017 I/O Expansion Board">
+        <img class="shop-image" src="assets/images/shop/shop5.webp" width="900" height="900" loading="lazy" alt="MCP23017 I/O Expansion Board">
 
         <p>
             In the FM4 Quadify project, you may find that the Raspberry Pi doesn’t have
@@ -653,7 +688,7 @@
     <section>
         <h3>7. SSD1322 OLED Display (SPI)</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop6.png" alt="2.8 inch SSD1322 OLED Display">
+        <img class="shop-image" src="assets/images/shop/shop6.webp" width="522" height="522" loading="lazy" alt="2.8 inch SSD1322 OLED Display">
 
         <p>
             For the FM4 Quadify project, you’ll need a <strong>2.8-inch OLED display</strong>
@@ -718,7 +753,7 @@
     <section>
         <h3>8. Rotary Encoder (KY-040)</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop7.png" alt="KY-040 Rotary Encoder Module">
+        <img class="shop-image" src="assets/images/shop/shop7.webp" width="1024" height="1024" loading="lazy" alt="KY-040 Rotary Encoder Module">
 
         <p>
             The <strong>KY-040 rotary encoder</strong> is used in the FM4 Quadify project
@@ -779,7 +814,7 @@
     <section>
         <h3>9. Jumper Wires (Female-to-Female)</h3>
 
-        <img class="shop-image" src="assets/images/shop/shop8.png" alt="Female-to-female jumper wires">
+        <img class="shop-image" src="assets/images/shop/shop8.webp" width="1536" height="1024" loading="lazy" alt="Female-to-female jumper wires">
 
         <p>
             You’ll need a set of <strong>female-to-female jumper wires</strong> to connect
@@ -831,7 +866,7 @@
 
     <section>
         <h3>10. Internal 5V Power Supply</h3>
-        <img class="shop-image" src="assets/images/shop/shop9.png" alt="">
+        <img class="shop-image" src="assets/images/shop/shop9.webp" width="608" height="608" loading="lazy" alt="">
         <p>
             Allows the Raspberry Pi and accessories to be powered internally while
             retaining the original FM4 mains passthrough.
@@ -840,7 +875,7 @@
 
     <section>
         <h3>11. Original FM4 Power Switch</h3>
-        <img class="shop-image" src="assets/images/shop/shop10.png" alt="">
+        <img class="shop-image" src="assets/images/shop/shop10.webp" width="1065" height="903" loading="lazy" alt="">
         <p>
             Reusing the original switch preserves the FM4 look and controls both the
             internal PSU and mains passthrough.
@@ -849,7 +884,7 @@
 
     <section>
         <h3>12. Base & 3D-Printed Screen Holder</h3>
-        <img class="shop-image" src="assets/images/shop/shop11.png" alt="">
+        <img class="shop-image" src="assets/images/shop/shop11.webp" width="1491" height="849" loading="lazy" alt="">
         <p>
             A clear perspex base and custom 3D-printed holder provide secure mounting
             for the new electronics and OLED display.
@@ -862,5 +897,15 @@
 
 </div>
 
+
+<script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var nav = document.getElementById('site-nav');
+            var open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+        });
+    });
+</script>
 </body>
 </html>

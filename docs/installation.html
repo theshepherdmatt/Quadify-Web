@@ -10,7 +10,7 @@
     <meta property="og:description" content="How to install Sable, the Volumio plugin behind Quadify, following the official GitHub instructions.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quadify.uk/installation.html">
-    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.webp">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
@@ -143,6 +143,40 @@
             font-size: 0.85rem;
             text-align: center;
         }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 0.75rem;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -151,8 +185,9 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="index.html" class="logo">Quadify</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-        <nav class="nav">
+        <nav class="nav" id="site-nav">
             <a href="index.html">Home</a>
             <a href="shopping.html">Shopping List</a>
             <a href="volumio.html">Volumio</a>
@@ -267,7 +302,7 @@
         <ul>
             <li>Reboot the Raspberry Pi if instructed</li>
             <li>Open the Volumio web interface</li>
-            <li>Check that Quadify appears in the Plugins section</li>
+            <li>Check that Sable appears in the Plugins section</li>
         </ul>
 
         <p class="note">
@@ -280,6 +315,16 @@
     </footer>
 
 </div>
+
+<script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var nav = document.getElementById('site-nav');
+            var open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+        });
+    });
+</script>
 </body>
 </html>
 

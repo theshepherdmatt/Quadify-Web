@@ -10,7 +10,7 @@
     <meta property="og:description" content="Step-by-step guide to building Quadify: an open-source hardware add-on for Raspberry Pi running Volumio.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quadify.uk/index.html">
-    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.webp">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
@@ -155,6 +155,40 @@
             font-size: 0.85rem;
             text-align: center;
         }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 0.75rem;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -163,8 +197,9 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="index.html" class="logo">Quadify</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-        <nav class="nav">
+        <nav class="nav" id="site-nav">
             <a href="index.html" class="active" aria-current="page">Home</a>
             <a href="shopping.html">Shopping List</a>
             <a href="volumio.html">Volumio</a>
@@ -179,7 +214,7 @@
 </header>
 
 <div class="hero">
-    <img src="assets/images/hero.png"
+    <img src="assets/images/hero.webp" width="2000" height="1200" loading="eager" fetchpriority="high"
         alt="Quadify hardware front panel with buttons and rotary control">
 </div>
 
@@ -208,7 +243,7 @@
             </li>
 
             <li>
-                <a href="installation.html">Install Quadify (Plugin)</a><br>
+                <a href="installation.html">Install Sable (Plugin)</a><br>
                 <span class="note">Follow the official GitHub instructions.</span>
             </li>
 
@@ -277,6 +312,16 @@
     </footer>
 
 </div>
+
+<script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var nav = document.getElementById('site-nav');
+            var open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+        });
+    });
+</script>
 </body>
 </html>
 

@@ -10,7 +10,7 @@
     <meta property="og:description" content="Wiring guide for the Quadify button matrix and LED outputs.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quadify.uk/buttons.html">
-    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.webp">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
@@ -143,6 +143,40 @@
             font-size: 0.85rem;
             text-align: center;
         }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 0.75rem;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -151,8 +185,9 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="index.html" class="logo">Quadify</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-        <nav class="nav">
+        <nav class="nav" id="site-nav">
             <a href="index.html">Home</a>
             <a href="shopping.html">Shopping List</a>
             <a href="volumio.html">Volumio</a>
@@ -176,7 +211,7 @@
     <section>
         <h2>The 8-button matrix</h2>
 
-        <img src="assets/images/buttons-1.png"
+        <img src="assets/images/buttons-1.webp" width="2050" height="1397" loading="lazy"
              alt="8 button matrix wiring layout"
              class="step-image">
 
@@ -207,7 +242,7 @@
     <section>
         <h2>Remove the button & LED circuit</h2>
 
-        <img src="assets/images/buttons-2.png"
+        <img src="assets/images/buttons-2.webp" width="2048" height="1344" loading="lazy"
              alt="Removing button and LED ribbon cables from original board"
              class="step-image">
 
@@ -230,7 +265,7 @@
     <section>
         <h2>Connecting to the MCP23017</h2>
 
-        <img src="assets/images/buttons-3.png"
+        <img src="assets/images/buttons-3.webp" width="2050" height="1397" loading="lazy"
              alt="MCP23017 pin-out for buttons and LEDs"
              class="step-image">
 
@@ -256,7 +291,7 @@
     <section>
         <h2>Finished board</h2>
 
-        <img src="assets/images/mcp23017-2.png"
+        <img src="assets/images/mcp23017-2.webp" width="1530" height="2040" loading="lazy"
              alt="Completed button and LED wiring on MCP23017 board"
              class="step-image">
 
@@ -276,6 +311,16 @@
     </footer>
 
 </div>
+
+<script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var nav = document.getElementById('site-nav');
+            var open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+        });
+    });
+</script>
 </body>
 </html>
 

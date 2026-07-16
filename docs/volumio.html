@@ -10,7 +10,7 @@
     <meta property="og:description" content="Install Volumio, connect to Wi-Fi, and enable your DAC: the first steps in a Quadify build.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quadify.uk/volumio.html">
-    <meta property="og:image" content="https://quadify.uk/assets/images/hero.png">
+    <meta property="og:image" content="https://quadify.uk/assets/images/hero.webp">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
 
@@ -136,6 +136,40 @@
             font-size: 0.85rem;
             text-align: center;
         }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1.1rem;
+            line-height: 1;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-inner {
+                flex-wrap: wrap;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding-top: 0.75rem;
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
     </style>
 </head>
 
@@ -144,8 +178,9 @@
 <header class="site-header">
     <div class="header-inner">
         <a href="index.html" class="logo">Quadify</a>
+        <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
 
-        <nav class="nav">
+        <nav class="nav" id="site-nav">
             <a href="index.html">Home</a>
             <a href="shopping.html">Shopping List</a>
             <a href="volumio.html" class="active" aria-current="page">Volumio</a>
@@ -183,7 +218,7 @@
     <section>
         <h2>Step 1: Install Volumio on the SD card</h2>
 
-        <img src="assets/images/volumio-1.png" class="step-image" alt="Raspberry Pi Imager">
+        <img src="assets/images/volumio-1.webp" width="688" height="472" loading="lazy" class="step-image" alt="Raspberry Pi Imager">
 
         <ol>
             <li>Go to <strong>https://www.raspberrypi.com/software/</strong></li>
@@ -202,7 +237,7 @@
     <section>
         <h2>Step 2: Assemble the hardware</h2>
 
-        <img src="assets/images/wifi-1.png" class="step-image" alt="DAC installed on Raspberry Pi">
+        <img src="assets/images/wifi-1.webp" width="1100" height="824" loading="lazy" class="step-image" alt="DAC installed on Raspberry Pi">
 
         <ul>
             <li>Ensure the Raspberry Pi is powered off</li>
@@ -215,7 +250,7 @@
     <section>
         <h2>Step 3: Power up</h2>
 
-        <img src="assets/images/wifi-3.png" class="step-image" alt="Powering the Raspberry Pi">
+        <img src="assets/images/wifi-3.webp" width="304" height="306" loading="lazy" class="step-image" alt="Powering the Raspberry Pi">
 
         <p>
             Connect the power supply and allow the Raspberry Pi to boot.
@@ -229,7 +264,7 @@
     <section>
         <h2>Step 4: Connect to Volumio’s Wi-Fi</h2>
 
-        <img src="assets/images/wifi-4.png" class="step-image" alt="Volumio Wi-Fi access point">
+        <img src="assets/images/wifi-4.webp" width="809" height="581" loading="lazy" class="step-image" alt="Volumio Wi-Fi access point">
 
         <ul>
             <li>Wait for a Wi-Fi network called <strong>Volumio</strong> or <strong>Volumio-XXXX</strong></li>
@@ -241,7 +276,7 @@
     <section>
         <h2>Step 5: Open the Volumio interface</h2>
 
-        <img src="assets/images/wifi-5.png" class="step-image" alt="Volumio web interface">
+        <img src="assets/images/wifi-5.webp" width="1891" height="880" loading="lazy" class="step-image" alt="Volumio web interface">
 
         <p>
             Open a browser and go to:
@@ -292,5 +327,15 @@
 
 </div>
 
+
+<script>
+    document.querySelectorAll('.nav-toggle').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var nav = document.getElementById('site-nav');
+            var open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open);
+        });
+    });
+</script>
 </body>
 </html>
